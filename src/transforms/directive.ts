@@ -1,11 +1,11 @@
-import * as YAML from "yaml";
 import { createDirective } from "../factories/directive";
 import { Context } from "../transform";
 import { Directive } from "../types";
 import { extractPropComments } from "../utils/extract-prop-comments";
+import * as YAML from "../yaml";
 
 export function transformDirective(
-  directive: YAML.cst.Directive,
+  directive: YAML.CST.Directive,
   context: Context,
 ): Directive {
   extractPropComments(directive, context);

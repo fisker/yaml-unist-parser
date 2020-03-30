@@ -1,4 +1,3 @@
-import * as YAML from "yaml";
 import { createMapping } from "../factories/mapping";
 import { createMappingItem } from "../factories/mapping-item";
 import { createPosition } from "../factories/position";
@@ -8,9 +7,13 @@ import { createSlicer } from "../utils/create-slicer";
 import { extractComments } from "../utils/extract-comments";
 import { extractPropComments } from "../utils/extract-prop-comments";
 import { getLast } from "../utils/get-last";
+import * as YAML from "../yaml";
 import { transformAstPair } from "./pair";
 
-export function transformMap(map: YAML.ast.Map, context: Context): Mapping {
+export function transformMap(
+  map: YAML.AST.BlockMap,
+  context: Context,
+): Mapping {
   const cstNode = map.cstNode!;
 
   cstNode.items
@@ -51,7 +54,7 @@ export function transformMap(map: YAML.ast.Map, context: Context): Mapping {
 }
 
 function groupCstItems(
-  cstItems: Array<Exclude<YAML.cst.Map["items"][number], YAML.cst.Comment>>,
+  cstItems: Array<Exclude<YAML.CST.Map["items"][number], YAML.CST.Comment>>,
 ) {
   const groups: Array<typeof cstItems> = [];
   const sliceCstItems = createSlicer(cstItems, 0);

@@ -1,4 +1,3 @@
-import * as YAML from "yaml";
 import { createFlowMappingItem } from "../factories/flow-mapping-item";
 import { createFlowSequence } from "../factories/flow-sequence";
 import { createFlowSequenceItem } from "../factories/flow-sequence-item";
@@ -9,10 +8,11 @@ import { extractComments } from "../utils/extract-comments";
 import { getFlowMapItemAdditionalRanges } from "../utils/get-flow-map-item-additional-ranges";
 import { getLast } from "../utils/get-last";
 import { groupCstFlowCollectionItems } from "../utils/group-cst-flow-collection-items";
+import * as YAML from "../yaml";
 import { transformAstPair } from "./pair";
 
 export function transformFlowSeq(
-  flowSeq: YAML.ast.FlowSeq,
+  flowSeq: YAML.AST.FlowSeq,
   context: Context,
 ): FlowSequence {
   const cstItemsWithoutComments = extractComments(
@@ -24,7 +24,10 @@ export function transformFlowSeq(
 
   const flowSequenceItems = flowSeq.items.map((item, index) => {
     if (item.type !== "PAIR") {
-      const node = context.transformNode(item);
+      const node = context.transformNode(item as Exclude<
+        typeof item,
+        YAML.Pair
+      >);
       return createFlowSequenceItem(
         createPosition(node.position.start, node.position.end),
         node,
@@ -47,8 +50,8 @@ export function transformFlowSeq(
     }
   });
 
-  const openMarker = cstItemsWithoutComments[0] as YAML.cst.FlowChar;
-  const closeMarker = getLast(cstItemsWithoutComments) as YAML.cst.FlowChar;
+  const openMarker = cstItemsWithoutComments[0] as YAML.CST.FlowChar;
+  const closeMarker = getLast(cstItemsWithoutComments) as YAML.CST.FlowChar;
 
   return createFlowSequence(
     context.transformRange({

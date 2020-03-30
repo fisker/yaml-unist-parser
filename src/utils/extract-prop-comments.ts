@@ -1,10 +1,10 @@
-import * as YAML from "yaml";
 import { PropLeadingCharacter } from "../constants";
 import { createComment } from "../factories/comment";
 import { Context } from "../transform";
+import * as YAML from "../yaml";
 
 export function extractPropComments(
-  node: YAML.cst.Node,
+  node: YAML.CST.Node,
   context: Context,
 ): void {
   for (const propRange of node.props) {

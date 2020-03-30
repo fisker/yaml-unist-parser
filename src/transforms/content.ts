@@ -1,4 +1,3 @@
-import * as YAML from "yaml";
 import { PropLeadingCharacter } from "../constants";
 import { createAnchor } from "../factories/anchor";
 import { createComment } from "../factories/comment";
@@ -6,9 +5,10 @@ import { createContent } from "../factories/content";
 import { createTag } from "../factories/tag";
 import { Context } from "../transform";
 import { Anchor, Comment, Content, Tag } from "../types";
+import * as YAML from "../yaml";
 
 export function transformContent(
-  node: YAML.ast.Node,
+  node: YAML.AST.Node,
   context: Context,
   isNotMiddleComment: (comment: Comment) => boolean = () => false,
 ): Content {
@@ -16,7 +16,7 @@ export function transformContent(
 
   const middleComments: Comment[] = [];
 
-  let firstTagOrAnchorRange: YAML.cst.Range | null = null;
+  let firstTagOrAnchorRange: YAML.CST.Range | null = null;
 
   let tag: Tag | null = null;
   let anchor: Anchor | null = null;

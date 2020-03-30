@@ -1,17 +1,17 @@
-import * as YAML from "yaml";
 import { createDocumentBody } from "../factories/document-body";
 import { Context } from "../transform";
 import { Comment, ContentNode, Point } from "../types";
 import { getLast } from "../utils/get-last";
 import { getMatchIndex } from "../utils/get-match-index";
 import { getPointText } from "../utils/get-point-text";
+import * as YAML from "../yaml";
 
 export function transformDocumentBody(
-  document: YAML.ast.Document,
+  document: YAML.Document,
   context: Context,
   headEndMarkerPoint: null | Point,
 ) {
-  const cstNode = document.cstNode!;
+  const cstNode = document.cstNode as YAML.CST.Document;
 
   const {
     comments,
@@ -34,7 +34,7 @@ export function transformDocumentBody(
 }
 
 function categorizeNodes(
-  document: YAML.cst.Document,
+  document: YAML.CST.Document,
   context: Context,
   headEndMarkerPoint: null | Point,
 ) {
@@ -94,7 +94,7 @@ function categorizeNodes(
 }
 
 function getPosition(
-  document: YAML.cst.Document,
+  document: YAML.CST.Document,
   content: null | ContentNode,
   context: Context,
 ) {

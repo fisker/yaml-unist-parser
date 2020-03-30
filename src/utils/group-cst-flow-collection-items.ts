@@ -1,14 +1,14 @@
-import * as YAML from "yaml";
+import * as YAML from "../yaml";
 import { createSlicer } from "./create-slicer";
 
 type CstFlowMapItemWithoutComment = Exclude<
-  YAML.cst.FlowMap["items"][number],
-  YAML.cst.Comment
+  YAML.CST.FlowMap["items"][number],
+  YAML.CST.Comment
 >;
 
 type CstFlowSeqItemWithoutComment = Exclude<
-  YAML.cst.FlowSeq["items"][number],
-  YAML.cst.Comment
+  YAML.CST.FlowSeq["items"][number],
+  YAML.CST.Comment
 >;
 
 export function groupCstFlowCollectionItems<

@@ -1,4 +1,4 @@
-import * as YAML from "yaml";
+import * as YAML from "../yaml";
 
 declare module "yaml" {
   namespace cst {
@@ -58,10 +58,10 @@ function visit(
   }
 }
 
-function isRange(obj: Record<string, any>): obj is YAML.cst.Range {
+function isRange(obj: Record<string, any>): obj is YAML.CST.Range {
   return typeof obj.start === "number";
 }
 
-function isFlowChar(obj: Record<string, any>): obj is YAML.cst.FlowChar {
+function isFlowChar(obj: Record<string, any>): obj is YAML.CST.FlowChar {
   return typeof obj.offset === "number";
 }

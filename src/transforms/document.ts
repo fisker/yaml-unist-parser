@@ -7,7 +7,7 @@ import { transformDocumentBody } from "./document-body";
 import { transformDocumentHead } from "./document-head";
 
 export function transformDocument(
-  document: YAML.ast.Document,
+  document: YAML.Document,
   context: Context,
 ): Document {
   const {
